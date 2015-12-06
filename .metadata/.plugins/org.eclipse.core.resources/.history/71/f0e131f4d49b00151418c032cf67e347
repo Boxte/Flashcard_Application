@@ -1,0 +1,216 @@
+# #!/usr/bin/python
+# from tkinter import *
+# import Font
+# from Font import TITLE_FONT, MBUT_FONT, CFLabel_FONT
+#  
+# '''
+#     Window is 600 by 600 and cannot be resized
+# '''
+#   
+# class FCApp(Tk):
+#     
+#     def __init__(self, parent):
+#         Frame.__init__(self, parent, background="white")   
+#            
+#         self.parent = parent
+#           
+#         self.initUI()
+#         
+#       
+#     def initUI(self):
+#         self.parent.title("Flashcard Application")
+#         self.pack(fill=BOTH, expand=1)
+#         quitButton_x = 15
+#         quitButton_y = 560
+#         FCApp.quitButton(self, quitButton_x, quitButton_y)
+#         
+#         # Container is where I stack a bunch of frames
+#         # on top of each other, then the one I want visible
+#         # will be raised above the others
+#         container = Frame(self)
+#         
+#         
+#         self.frames = {}
+#         for F in (WelcomeScreen, CreateFlashcards):
+#             frame = F(container, self)
+#             self.frames[F] = frame
+#             
+#         self.show_frame(WelcomeScreen)
+#         
+#           
+#     def quitButton(self, x_coordinate, y_coordinate):
+#         quitBut = Button(self, text="Quit",
+#                          command=self.quit)
+#         quitBut.place(x=x_coordinate,y=y_coordinate)
+#     
+#     def show_frame(self, c):
+#         frame = self.frames[c]
+#         frame.tkraise()
+# '''      
+# class Button():
+#     def __init__(self, x_coordinate, y_coordinate):
+#         self.x_coordinate = x_coordinate
+#         self.y_coordinate = y_coordinate
+#     def quitButton(self):
+#         quitBut = Button(self, text="Quit",
+#                          command=close_window())
+#         quitBut.place(x=self.x_coordinate,y=self.y_coordinate) 
+#     def close_window(self):
+#         self.destroy()
+# class CommandsWin():
+#     '''
+#   
+# class WelcomeScreen(Frame):
+#     def __init__(self, parent, controller):
+#         Frame.__init__(self, parent)
+#         self.controller = controller
+#         label = Label(self, text="Welcome to the Flashcard Application!", font=TITLE_FONT)
+#         label.pack(side="bottom", fill="x", pady=10)
+#          
+#         button1 = Button(self, text="Next", command=lambda: controller.show_frame(Menu))
+#         button1.pack()
+#          
+# class Menu(Frame):
+#     def __init__ (self, parent, controller):
+#         Frame.__init__(self, parent)
+#         self.controller = controller
+#         createButton = Button(self, text="Create flash cards", font=MBUT_FONT,
+#                       command=lambda: controller.show_frame(CreateFlashcards))
+#         createButton.pack()
+#          
+# class CreateFlashcards(Frame):
+#     def __init__ (self, parent, controller):
+#         Frame.__init__(self, parent)
+#         self.controller = controller
+#         label = Label(self, text="Create flash cards.", font=CFLabel_FONT)
+#         label.pack(side="top", fill="x", pady=10)
+#         
+#         text1 = Text(self)
+#         text1.pack()
+#   
+# # def main():
+# #     
+# #     root = Tk()
+# #     root.geometry("600x600+150+50")
+# #     app = Window(root)
+# #     root.resizable(0,0)
+# #     root.mainloop()  
+#   
+# if __name__ == '__main__':
+#     root = Tk()
+#     root.geometry("600x600+150+50")
+#     app = FCApp(root)
+#     root.resizable(0, 0)
+#     root.mainloop()
+
+import tkinter as tk
+
+class BaseFrame(tk.Frame):
+    """An abstract base class for the frames that sit inside PythonGUI.
+
+    Args:
+      master (tk.Frame): The parent widget.
+      controller (PythonGUI): The controlling Tk object.
+
+    Attributes:
+      controller (PythonGUI): The controlling Tk object.
+
+    """
+
+    def __init__(self, master, controller):
+        tk.Frame.__init__(self, master)
+        self.controller = controller
+        self.grid()
+        self.create_widgets()
+
+    def create_widgets(self):
+        """Create the widgets for the frame."""
+        raise NotImplementedError
+
+
+class ExecuteFrame(BaseFrame):
+    """The application home page.
+
+    Attributes:
+      new_button (tk.Button): The button to switch to HomeFrame.
+
+    """
+
+    def create_widgets(self):
+        """Create the base widgets for the frame."""
+        self.new_button = tk.Button(self,
+                                    anchor=tk.W,
+                                    command=lambda: self.controller.show_frame(WelcomeScreen),
+                                    padx=5,
+                                    pady=5,
+                                    text="Home")
+        self.new_button.grid(padx=5, pady=5, sticky=tk.W+tk.E)
+
+
+class WelcomeScreen(BaseFrame):
+    """The application home page.
+
+    Attributes:
+      new_button (tk.Button): The button to switch to ExecuteFrame.
+
+    """
+
+    def create_widgets(self):
+        """Create the base widgets for the frame."""
+        self.new_button = tk.Button(self,
+                                    anchor=tk.W,
+                                    command=lambda: self.controller.show_frame(ExecuteFrame),
+                                    padx=5,
+                                    pady=5,
+                                    text="Next")
+        self.new_button.grid(padx=5, pady=5, sticky=tk.W+tk.E)
+
+    def quitButton(self, x_coordinate, y_coordinate):
+         quitBut = Button(self, text="Quit",
+                          command=self.quit)
+         quitBut.place(x=x_coordinate,y=y_coordinate)
+
+class UI(tk.Tk):
+    """The main window of the GUI.
+
+    Attributes:
+      container (tk.Frame): The frame container for the sub-frames.
+      frames (dict of tk.Frame): The available sub-frames.
+
+    """
+
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.title("Flashcard Application")
+        self.create_widgets()
+        self.resizable(0, 0)
+
+    def create_widgets(self):
+        """Create the widgets for the frame."""             
+        #   Frame Container
+        self.container = tk.Frame(self)
+        self.container.grid(row=0, column=0, sticky=tk.W+tk.E)
+
+        #   Frames
+        self.frames = {}
+        for f in (WelcomeScreen, ExecuteFrame): # defined subclasses of BaseFrame
+            frame = f(self.container, self)
+            frame.grid(row=2, column=2, sticky=tk.NW+tk.SE)
+            self.frames[f] = frame
+        self.show_frame(WelcomeScreen)
+
+    def show_frame(self, cls):
+        """Show the specified frame.
+
+        Args:
+          cls (tk.Frame): The class of the frame to show. 
+
+        """
+        self.frames[cls].tkraise()
+
+if __name__ == "__main__":
+    app = UI()
+    app.geometry("600x600+150+50")
+    app.mainloop()
+    exit()
+
