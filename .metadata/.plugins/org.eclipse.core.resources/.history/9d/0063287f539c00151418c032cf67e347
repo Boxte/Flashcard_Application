@@ -1,0 +1,6 @@
+class Flashcards():
+	def __init__(self):
+		hello = self
+	def printH(self, event):
+		print("goodbye world")
+	def storage(self, key, value):

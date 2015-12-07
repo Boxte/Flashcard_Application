@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Flashcard_App/Flashcards&apos; to &apos;Flashcards.py&apos;" description="Rename resource &apos;Flashcards&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Flashcards" name="Flashcards.py" stamp="1449430021592" updateReferences="true"/>
+</session>

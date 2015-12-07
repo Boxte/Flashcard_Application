@@ -105,6 +105,7 @@
 
 import tkinter as tk
 from Font import *
+from Flashcards import Flashcards
 
 class FC_App(tk.Tk):
 
@@ -156,7 +157,7 @@ class Menu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="This is page 1", font=TITLE_FONT)
+        label = tk.Label(self, text="Menu", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
         button = tk.Button(self, text="Create flashcards",
                            command=lambda: controller.show_frame(CreateFlashcards))
@@ -169,25 +170,67 @@ class CreateFlashcards(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.f = tk.Frame(self,width=600,height=600)
+        self.CreateWidgets(controller)
+        
+    def printAll(self):
+        for item in self.listKeys:
+            print(item)    
+        for item in self.listValues:
+            print(item)
+    
+        
+    def CreateWidgets(self, controller):
+        self.listKeys = list()
+        self.listValues = list()
+        backEnd = Flashcards()
+        
+        #Labels
         label = tk.Label(self, text="Create some flashcards", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
-        instructions = tk.Label(self, text="Type in the left box to enter one side of the flashcard.\n")
-        instructions.pack(side="top", pady=(10, 5))
-        instructions1 = tk.Label(self, text="Type in the right box to enter the other side of the flashcard.\n")
-        instructions1.pack(side="top", pady=(5,0))
-        backButton = tk.Button(self, text="Menu",
+        instructions = tk.Label(self, text="Type in the left box to enter one side of the flashcard.")
+        instructions.pack(side="top", pady=(10, 0))
+        instructions1 = tk.Label(self, text="Type in the right box to enter the other side of the flashcard.")
+        instructions1.pack(side="top")
+        instructions2 = tk.Label(self, text="Click 'Submit entries' to enter one completed flashcard.")
+        instructions2.pack(side="top")
+        #Text entry boxes
+        self.frontOfCard = tk.Entry(self)
+        self.backOfCard = tk.Entry(self)
+        self.frontOfCard.config(width=20)
+        self.backOfCard.config(width=20)
+        self.frontOfCard.place(x=50,y=150)
+        self.backOfCard.place(x=330, y=150)
+        
+        #Buttons
+        self.menuButton = tk.Button(self, text="Menu",
                            command=lambda: controller.show_frame(Menu),
                            bg="white")
-        backButton.config(width=20)
-        frontOfCard = tk.Entry(self)
-        backOfCard = tk.Entry(self)
-        backOfCard.pack(side="left", padx=(100,0))
-        frontOfCard.pack(side="right", padx=(0,100))
+        self.menuButton.config(width=10)
+        self.menuButton.place(x=20, y=260)
+        self.submitButton = tk.Button(self, text="Submit entries",
+                                 command=self.getKey)
+        self.submitButton.config(width=15)
+        self.submitButton.place(x=200, y=260)
+        self.finishButton = tk.Button(self, text="Finish",
+                                     command=lambda: controller.show_frame(Study))
+        self.finishButton.place(x=440,y=260)    
+    
+    def getKey(self):
+        self.listKeys.append(self.frontOfCard.get())
+        self.listValues.append(self.backOfCard.get())
+    
+class Study(tk.Frame):
+    def __init__(self,parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        self.f = tk.Frame(self,width=600,height=600)
+        self.CreateWidgets(controller)
         
-        backButton.pack(side="bottom", pady=10)
-
-
+    def CreateWidgets(self, controller):
+        hello = self
+    
 if __name__ == "__main__":
     app = FC_App()
     app.geometry("500x300+150+50")
+    app.resizable(0, 0)
     app.mainloop()

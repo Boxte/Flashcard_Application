@@ -1,28 +1,32 @@
 -- VERSION_4
 -- START DISKCACHE_2
 C:\Users\Van\SkyDrive\Work\Fall_2015\ECE_2524\Project3\Flashcard_Application\.metadata\.plugins\org.eclipse.core.resources\.projects\Flashcard_App\com.python.pydev.analysis\v2_indexcache
-UI|1449381677753336000|C:\Users\Van\SkyDrive\Work\Fall_2015\ECE_2524\Project3\Flashcard_Application\Flashcard_App\UI.py
+UI|1449445977189537000|C:\Users\Van\SkyDrive\Work\Fall_2015\ECE_2524\Project3\Flashcard_Application\Flashcard_App\UI.py
 WelcomeScreen|1449373132179072000|C:\Users\Van\SkyDrive\Work\Fall_2015\ECE_2524\Project3\Flashcard_Application\Flashcard_App\WelcomeScreen.py
+Flashcards|1449442323662912000|C:\Users\Van\SkyDrive\Work\Fall_2015\ECE_2524\Project3\Flashcard_Application\Flashcard_App\Flashcards.py
 Font|1449374959309347000|C:\Users\Van\SkyDrive\Work\Fall_2015\ECE_2524\Project3\Flashcard_Application\Flashcard_App\Font.py
 -- END DISKCACHE
 -- START DICTIONARY
-13
-8=CreateFlashcards
-4=PageOne
-3=WelcomeScreen
-12=PageOne.__init__
+16
+10=Study
+9=CreateFlashcards
+11=CreateFlashcards.CreateWidgets
+5=PageOne
+4=WelcomeScreen
+15=PageOne.__init__
 1=Font
-5=FC_App
-10=Menu.__init__
-13=FC_App.__init__
+6=FC_App
+13=Menu.__init__
+16=FC_App.__init__
 2=UI
-6=StartPage
-9=StartPage.__init__
-11=CreateFlashcards.__init__
-7=Menu
+7=StartPage
+3=Flashcards
+12=StartPage.__init__
+14=CreateFlashcards.__init__
+8=Menu
 -- END DICTIONARY
 -- START TREE 1
-30
+32
 T|0|
 UI|0|
 b|0|
@@ -36,36 +40,48 @@ ent|0|
 exe|0|
 fc_|1|FC_App!17@
 fca|0|
+fla|1|Flashcards!25@
 hom|0|
 mai|0|
 mak|0|
 mas|0|
 mbu|1|MBUT_FONT!11@
 men|1|Menu!17@
-pag|1|PageOne!25@
+pag|1|PageOne!33@
 pas|0|
 pyt|0|
 roo|0|
 sam|0|
 sta|1|StartPage!17@
+stu|1|Study!17@
 tex|0|
-tit|2|TITLE_FONT!11@TITLE_FONT!27@
+tit|2|TITLE_FONT!11@TITLE_FONT!35@
 use|0|
 wel|0|
 win|0|
 -- END TREE
 -- START TREE 2
-12
-__i|5|__init__!4&26@__init__!5&18@__init__!6&18@__init__!7&18@__init__!8&18@
-app|1|app!8&19@
-con|4|controller!9&19@controller!10&19@controller!11&19@controller!12&27@
-cre|0|
-f|1|f!11&19@
-fra|1|frames!13&19@
+22
+__i|6|__init__!5&34@__init__!6&18@__init__!7&18@__init__!8&18@__init__!9&18@__init__!3&26@
+app|1|app!10&19@
+bac|2|backOfCard!11&19@backButton!11&19@
+con|4|controller!12&19@controller!13&19@controller!14&19@controller!15&35@
+cre|1|CreateWidgets!9&18@
+f|1|f!14&19@
+fin|1|finishButton!11&19@
+fra|1|frames!16&19@
+fro|1|frontOfCard!11&19@
+get|1|getKey!9&18@
 ini|0|
+key|0|
+lis|2|listValues!11&19@listKeys!11&19@
 new|0|
 par|0|
+pri|2|printH!3&26@printAll!9&18@
 qui|0|
 roo|0|
-sho|1|show_frame!5&18@
+sho|1|show_frame!6&18@
+sto|0|
+sub|1|submitButton!11&19@
+val|0|
 -- END TREE

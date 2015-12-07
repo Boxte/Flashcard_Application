@@ -1,0 +1,2 @@
+class Flashcards(self):
+	def __init__()
