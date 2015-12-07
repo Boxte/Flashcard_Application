@@ -1,0 +1,8 @@
+
+class Flashcards():
+	def __init__(self):
+		hello = self
+	def operate(self):
+		print("goodbye world")
+	#def appendToStorage(self, key, value):
+		

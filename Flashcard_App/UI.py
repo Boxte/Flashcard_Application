@@ -1,11 +1,4 @@
-# #!/usr/bin/python
-# from tkinter import *
-# import Font
-# from Font import TITLE_FONT, MBUT_FONT, CFLabel_FONT
-#  
-# '''
-#     Window is 600 by 600 and cannot be resized
-# '''
+
 #   
 # class FCApp(Tk):
 #     
@@ -104,8 +97,13 @@
 #     root.mainloop()
 
 import tkinter as tk
+import tkinter.messagebox
+from tkinter.ttk import *
 from Font import *
 from Flashcards import Flashcards
+
+#Global variable
+backEnd = Flashcards()
 
 class FC_App(tk.Tk):
 
@@ -122,9 +120,11 @@ class FC_App(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (StartPage, Menu, CreateFlashcards):
+        for F in (StartPage, Menu, CreateFlashcards, Study):
             frame = F(container, self)
             self.frames[F] = frame
+            s = Style()
+            s.configure(frame, background="white")
             # put all of the pages in the same location;
             # the one on the top of the stacking order
             # will be the one that is visible.
@@ -146,7 +146,8 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text="Welcome to the flashcard\napplication!",
                           font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
-
+        label1 = tk.Label(self, text="Creators: Van Le, Connie Lim, Nhan Pham")
+        label1.pack(side="top", pady=10)
         button1 = tk.Button(self, text="Next",
                             command=lambda: controller.show_frame(Menu))
         button1.pack(side="bottom", pady=10)
@@ -169,7 +170,7 @@ class CreateFlashcards(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.f = tk.Frame(self,width=600,height=600)
+        self.f = tk.Frame(self,width=300,height=500)
         self.CreateWidgets(controller)
         
     def printAll(self):
@@ -182,7 +183,7 @@ class CreateFlashcards(tk.Frame):
     def CreateWidgets(self, controller):
         self.listKeys = list()
         self.listValues = list()
-        backEnd = Flashcards()
+        
         
         #Labels
         label = tk.Label(self, text="Create some flashcards", font=TITLE_FONT)
@@ -211,23 +212,34 @@ class CreateFlashcards(tk.Frame):
                                  command=self.getKey)
         self.submitButton.config(width=15)
         self.submitButton.place(x=200, y=260)
-        self.finishButton = tk.Button(self, text="Finish",
-                                     command=lambda: controller.show_frame(Study))
+        self.finishButton = tk.Button(self, text="Finish", command=self.showFinishedBox)
         self.finishButton.place(x=440,y=260)    
-    
+                
     def getKey(self):
         self.listKeys.append(self.frontOfCard.get())
         self.listValues.append(self.backOfCard.get())
-    
+        
+    def showFinishedBox(self):
+        self.answer = tkinter.messagebox.askquestion('Finish', 'Are you done submitting flashcards?')
+        if self.answer == 'yes':
+            self.controller.show_frame(Study)
+            
+            
 class Study(tk.Frame):
     def __init__(self,parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.f = tk.Frame(self,width=600,height=600)
+        self.f = tk.Frame(self,width=500,height=300)
         self.CreateWidgets(controller)
         
     def CreateWidgets(self, controller):
-        hello = self
+        study_label = tk.Label(self, text="Study Scene", font=TITLE_FONT)
+        study_label.pack(side="top")
+        self.menuButton = tk.Button(self, text="Menu",
+                           command=lambda: controller.show_frame(Menu),
+                           bg="white")
+        self.menuButton.config(width=10)
+        self.menuButton.place(x=20, y=260)
     
 if __name__ == "__main__":
     app = FC_App()
