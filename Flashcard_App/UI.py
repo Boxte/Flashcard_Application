@@ -222,10 +222,21 @@ class CreateFlashcards(tk.Frame):
     def showFinishedBox(self):
         self.answer = tkinter.messagebox.askquestion('Finish', 'Are you done submitting flashcards?')
         if self.answer == 'yes':
-            self.controller.show_frame(Study)
+            flag = False #boolean to continue to next scene
+            if len(self.listKeys) > 0 and len(self.listValues) > 0:
+                flag = True
+                
+            if flag == True:
+                
+                self.controller.show_frame(Study)
+            else:
+                tkinter.messagebox.showinfo("Error", "Do not forget to submit entries!\nYou have no flashcards!")
             
             
 class Study(tk.Frame):
+    
+    
+    
     def __init__(self,parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -233,13 +244,27 @@ class Study(tk.Frame):
         self.CreateWidgets(controller)
         
     def CreateWidgets(self, controller):
+        self.y_button_coordinate = 260
+        
+        #Labels
         study_label = tk.Label(self, text="Study Scene", font=TITLE_FONT)
         study_label.pack(side="top")
+        
+        #Buttons
         self.menuButton = tk.Button(self, text="Menu",
                            command=lambda: controller.show_frame(Menu),
                            bg="white")
         self.menuButton.config(width=10)
-        self.menuButton.place(x=20, y=260)
+        self.menuButton.place(x=20, y=self.y_button_coordinate)
+        self.flipButton = tk.Button(self, text="Flip card")
+        self.flipButton.config(width=12)
+        self.flipButton.place(x=140, y=self.y_button_coordinate)
+        self.nextCardButton = tk.Button(self, text="Next card")
+        self.nextCardButton.config(width=10)
+        self.nextCardButton.place(x=270, y=self.y_button_coordinate)
+        self.finishButton = tk.Button(self, text="Finish")
+        self.finishButton.config(width=10)
+        self.finishButton.place(x=400,y=self.y_button_coordinate)
     
 if __name__ == "__main__":
     app = FC_App()

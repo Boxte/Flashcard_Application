@@ -4,4 +4,10 @@ class Flashcards():
 		hello = self
 	def operate(self):
 		
+	def cards(self, key_list, value_list):
+		self.keys = key_list
+		self.values = value_list
+	
+	def shuffle_cards(self):
+		self.shuffledKeys =
 		

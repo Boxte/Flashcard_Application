@@ -1,0 +1,10 @@
+
+class Flashcards():
+	def __init__(self):
+		hello = self
+	def operate(self):
+		
+	def cards(self, key_list, value_list):
+		
+		
+		

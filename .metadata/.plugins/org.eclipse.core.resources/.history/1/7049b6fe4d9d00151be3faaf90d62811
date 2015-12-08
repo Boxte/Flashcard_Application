@@ -1,0 +1,7 @@
+
+class Flashcards():
+	def __init__(self):
+		hello = self
+	#def operate(self):
+		
+		
