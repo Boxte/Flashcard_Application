@@ -291,7 +291,6 @@ class Study(tk.Frame):
         self.startButton.config(width=15,height=3)
         self.startButton.place(x=200, y=75)
         
-    #Necessary method below to avoid definition errors
     def getArrLength(self):
         return len(listKeys)    
     def print_debug(self):
@@ -307,8 +306,8 @@ class Study(tk.Frame):
     def flip(self):
         if self.showLabel is False: 
             message1 = listValues[self.flashcardIndex]
-            self.backL0 = tk.Label(self, text=message1, font=CFLabel_FONT1)
-            self.backL0.place(x=160, y=125)
+            self.frontL1 = tk.Label(self, text=message1, font=CFLabel_FONT1)
+            self.frontL1.place(x=160, y=125)
             self.showLabel = True
         else:
             self.frontL1.destroy()
@@ -322,18 +321,13 @@ class Study(tk.Frame):
             while (self.randomNum != self.randomNum):
                 self.randomNum = randint(0, len(listKeys))
         '''
-        temp = self.getArrLength() - 1
+        temp = self.getArrLength()
         self.flashcardIndex = self.flashcardIndex + 1
-        print(self.flashcardIndex)
-        print(temp)
-        if temp < self.flashcardIndex:
+        if self.flashcardIndex > temp:
             self.flashcardIndex = 0
         
         message = listKeys[self.flashcardIndex]
-        message1 = listValues[self.flashcardIndex]
         self.frontL0.config(text=message)
-        self.backL0.config(text=message1)
-        
 '''
             self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
             self.frontL0.place(x=160, y=75) '''

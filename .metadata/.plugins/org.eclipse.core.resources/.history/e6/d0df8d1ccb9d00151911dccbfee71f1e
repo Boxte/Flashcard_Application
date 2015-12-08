@@ -332,7 +332,7 @@ class Study(tk.Frame):
         message = listKeys[self.flashcardIndex]
         message1 = listValues[self.flashcardIndex]
         self.frontL0.config(text=message)
-        self.backL0.config(text=message1)
+        self.
         
 '''
             self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)

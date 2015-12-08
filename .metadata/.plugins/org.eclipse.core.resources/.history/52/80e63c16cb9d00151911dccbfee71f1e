@@ -307,8 +307,8 @@ class Study(tk.Frame):
     def flip(self):
         if self.showLabel is False: 
             message1 = listValues[self.flashcardIndex]
-            self.backL0 = tk.Label(self, text=message1, font=CFLabel_FONT1)
-            self.backL0.place(x=160, y=125)
+            self.frontL1 = tk.Label(self, text=message1, font=CFLabel_FONT1)
+            self.frontL1.place(x=160, y=125)
             self.showLabel = True
         else:
             self.frontL1.destroy()
@@ -332,7 +332,6 @@ class Study(tk.Frame):
         message = listKeys[self.flashcardIndex]
         message1 = listValues[self.flashcardIndex]
         self.frontL0.config(text=message)
-        self.backL0.config(text=message1)
         
 '''
             self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)

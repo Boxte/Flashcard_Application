@@ -192,7 +192,7 @@ class CreateFlashcards(tk.Frame):
         listValues = []
         global messageWid
         messageWid = tkinter.StringVar()
-    
+        
         #Labels
         label = tk.Label(self, text="Create some flashcards", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
@@ -253,7 +253,6 @@ class CreateFlashcards(tk.Frame):
             
 class Study(tk.Frame):
         
-    
     def __init__(self,parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -263,7 +262,6 @@ class Study(tk.Frame):
     def CreateWidgets(self, controller):
         self.y_button_coordinate = 260
         #Random number for printing out flash cards
-        self.flashcardIndex = 0
         self.randomNum = randint(0, len(listKeys))
         self.showLabel = False
         self.makeNewCard = False
@@ -281,7 +279,7 @@ class Study(tk.Frame):
                                     command=self.flip)
         self.flipButton.config(width=12)
         self.flipButton.place(x=140, y=self.y_button_coordinate)
-        self.nextCardButton = tk.Button(self, text="Next card", command=self.nextCard)
+        self.nextCardButton = tk.Button(self, text="Next card", command=self.nextPart)
         self.nextCardButton.config(width=10)
         self.nextCardButton.place(x=270, y=self.y_button_coordinate)
         self.finishButton = tk.Button(self, text="Finish", command=self.quit)
@@ -291,9 +289,7 @@ class Study(tk.Frame):
         self.startButton.config(width=15,height=3)
         self.startButton.place(x=200, y=75)
         
-    #Necessary method below to avoid definition errors
-    def getArrLength(self):
-        return len(listKeys)    
+        
     def print_debug(self):
         for item in listKeys:
             print(item)
@@ -301,44 +297,35 @@ class Study(tk.Frame):
         print(message + ":")   
     def initalize(self):
         self.startButton.destroy()
-        message = listKeys[self.flashcardIndex]
+        message = listKeys[self.randomNum]
         self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
         self.frontL0.place(x=160, y=75)
+    def nextCard(self):
+        if self.makeNewCard is True:
+            message = listKeys[self.randomNum]
+            self.frontL0.config(text=message)
+            self.makeNewCard = False
+        else:
+            message = listKeys[self.randomNum]
+            self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
+            self.frontL0.place(x=160, y=75)
     def flip(self):
         if self.showLabel is False: 
-            message1 = listValues[self.flashcardIndex]
-            self.backL0 = tk.Label(self, text=message1, font=CFLabel_FONT1)
-            self.backL0.place(x=160, y=125)
+            message1 = listValues[self.randomNum]
+            self.frontL1 = tk.Label(self, text=message1, font=CFLabel_FONT1)
+            self.frontL1.place(x=160, y=125)
             self.showLabel = True
         else:
             self.frontL1.destroy()
             self.showLabel = False
-    
-    def nextCard(self):
-        '''
+    def nextPart(self):
         self.tempRandomNum = self.randomNum
         self.randomNum = randint(0, len(listKeys))
         if self.tempRandomNum == self.randomNum:
             while (self.randomNum != self.randomNum):
                 self.randomNum = randint(0, len(listKeys))
-        '''
-        temp = self.getArrLength() - 1
-        self.flashcardIndex = self.flashcardIndex + 1
-        print(self.flashcardIndex)
-        print(temp)
-        if temp < self.flashcardIndex:
-            self.flashcardIndex = 0
-        
-        message = listKeys[self.flashcardIndex]
-        message1 = listValues[self.flashcardIndex]
-        self.frontL0.config(text=message)
-        self.backL0.config(text=message1)
-        
-'''
-            self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
-            self.frontL0.place(x=160, y=75) '''
-    
-    
+        self.makeNewCard = True
+        self.nextCard
         
 if __name__ == "__main__":
     app = FC_App()
