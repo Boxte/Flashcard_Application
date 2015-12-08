@@ -100,10 +100,15 @@ import tkinter as tk
 import tkinter.messagebox
 from tkinter.ttk import *
 from Font import *
-from Flashcards import Flashcards
+from Flashcards import *
+from random import *
 
 #Global variable
 backEnd = Flashcards()
+global messageFront
+global messageBack
+###There are more
+
 
 class FC_App(tk.Tk):
 
@@ -181,9 +186,12 @@ class CreateFlashcards(tk.Frame):
     
         
     def CreateWidgets(self, controller):
-        self.listKeys = list()
-        self.listValues = list()
-        
+        global listKeys
+        listKeys = []
+        global listValues
+        listValues = []
+        global messageWid
+        messageWid = tkinter.StringVar()
         
         #Labels
         label = tk.Label(self, text="Create some flashcards", font=TITLE_FONT)
@@ -216,27 +224,35 @@ class CreateFlashcards(tk.Frame):
         self.finishButton.place(x=440,y=260)    
                 
     def getKey(self):
-        self.listKeys.append(self.frontOfCard.get())
-        self.listValues.append(self.backOfCard.get())
+        listKeys.append(self.frontOfCard.get())
+        listValues.append(self.backOfCard.get())
+        self.clear_text()
+            
+    def clear_text(self):
+        self.frontOfCard.delete(0, "end")
+        self.backOfCard.delete(0, "end")
+        self.frontOfCard.insert(0, "")
+        self.backOfCard.insert(0, "")
         
     def showFinishedBox(self):
         self.answer = tkinter.messagebox.askquestion('Finish', 'Are you done submitting flashcards?')
         if self.answer == 'yes':
             flag = False #boolean to continue to next scene
-            if len(self.listKeys) > 0 and len(self.listValues) > 0:
+            if len(listKeys) > 0 and len(listValues) > 0:
                 flag = True
                 
             if flag == True:
-                
+                side_one = listKeys
+                side_two = listValues
+                messageStudy= listKeys[0]
+                messageWid = listValues[0]
                 self.controller.show_frame(Study)
             else:
                 tkinter.messagebox.showinfo("Error", "Do not forget to submit entries!\nYou have no flashcards!")
             
             
 class Study(tk.Frame):
-    
-    
-    
+        
     def __init__(self,parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -245,8 +261,11 @@ class Study(tk.Frame):
         
     def CreateWidgets(self, controller):
         self.y_button_coordinate = 260
-        
-        #Labels
+        #Random number for printing out flash cards
+        self.randomNum = randint(0, len(listKeys))
+        self.showLabel = False
+        self.makeNewCard = False
+        #Title labels
         study_label = tk.Label(self, text="Study Scene", font=TITLE_FONT)
         study_label.pack(side="top")
         
@@ -256,16 +275,58 @@ class Study(tk.Frame):
                            bg="white")
         self.menuButton.config(width=10)
         self.menuButton.place(x=20, y=self.y_button_coordinate)
-        self.flipButton = tk.Button(self, text="Flip card")
+        self.flipButton = tk.Button(self, text="Flip card",
+                                    command=self.flip)
         self.flipButton.config(width=12)
         self.flipButton.place(x=140, y=self.y_button_coordinate)
-        self.nextCardButton = tk.Button(self, text="Next card")
+        self.nextCardButton = tk.Button(self, text="Next card", command=self.nextPart)
         self.nextCardButton.config(width=10)
         self.nextCardButton.place(x=270, y=self.y_button_coordinate)
-        self.finishButton = tk.Button(self, text="Finish")
+        self.finishButton = tk.Button(self, text="Finish", command=self.quit)
         self.finishButton.config(width=10)
         self.finishButton.place(x=400,y=self.y_button_coordinate)
-    
+        self.startButton = tk.Button(self, text="Begin", command=self.initalize)
+        self.startButton.config(width=15,height=3)
+        self.startButton.place(x=200, y=75)
+        
+        
+    def print_debug(self):
+        for item in listKeys:
+            print(item)
+        message = listKeys[0]
+        print(message + ":")   
+    def initalize(self):
+        self.startButton.destroy()
+        message = listKeys[self.randomNum]
+        self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
+        self.frontL0.place(x=160, y=75)
+    def nextCard(self):
+        if self.makeNewCard is True:
+            message = listKeys[self.randomNum]
+            self.frontL0.config(text=message)
+            self.makeNewCard = False
+        else:
+            message = listKeys[self.randomNum]
+            self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
+            self.frontL0.place(x=160, y=75)
+    def flip(self):
+        if self.showLabel is False: 
+            message1 = listValues[self.randomNum]
+            self.frontL1 = tk.Label(self, text=message1, font=CFLabel_FONT1)
+            self.frontL1.place(x=160, y=125)
+            self.showLabel = True
+        else:
+            self.frontL1.destroy()
+            self.showLabel = False
+    def nextPart(self):
+        self.tempRandomNum = self.randomNum
+        self.randomNum = randint(0, len(listKeys))
+        if self.tempRandomNum == self.randomNum:
+            while (self.randomNum != self.randomNum):
+                self.randomNum = randint(0, len(listKeys))
+        self.makeNewCard = True
+        self.nextCard
+        
 if __name__ == "__main__":
     app = FC_App()
     app.geometry("500x300+150+50")

@@ -1,0 +1,29 @@
+from random import *
+
+class Flashcards():
+	def __init__(self):
+		hello = self
+	
+	def cards(self, key_list, value_list):
+		self.keys = key_list
+		self.values = value_list
+	
+	def shuffle_cards(self, key_list, value_list):
+		self.shuffledKeys = key_list
+		self.shuffledValues = value_list
+		index_shuf = range(len(key_list))
+		shuffle
+		
+	def operate(self, key_list, value_list):
+		self.cards(key_list, value_list)
+		self.shuffle_cards
+		
+	def getShuffledKeys(self):
+		return self.shuffledKeys
+	
+	def getShuffledValues(self):
+		return self.shuffledValues
+	
+	
+		
+		
