@@ -28,6 +28,11 @@ class Flashcards():
 	def getShuffledValues(self):
 		return self.shuffledValues
 	
+	def setShuffledKeys(self, key_list):
+		self.shuffledKeys = key_list
 	
+	def setShuffledValues(self, value_list):
+		self.shuffledValues = value_list
+		
 		
 		
