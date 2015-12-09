@@ -101,7 +101,7 @@ class CreateFlashcards(tk.Frame):
         listValues = []
         global messageWid
         messageWid = tkinter.StringVar()
-    
+		
         #Labels
         label = tk.Label(self, text="Create some flashcards", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
@@ -176,6 +176,8 @@ class Study(tk.Frame):
         self.randomNum = randint(0, len(listKeys))
         self.showLabel = False
         self.makeNewCard = False
+		self.flipAgainForNext = False
+		 
         #Title labels
         study_label = tk.Label(self, text="Study Scene", font=TITLE_FONT)
         study_label.pack(side="top")
@@ -219,9 +221,12 @@ class Study(tk.Frame):
             self.backL0 = tk.Label(self, text=message1, font=CFLabel_FONT1)
             self.backL0.place(x=160, y=125)
             self.showLabel = True
+            self.flipAgainForNext = True
         else:
-            self.frontL1.destroy()
+            #can also use self.backL0.destroy()
+            self.backL0.config(text="")
             self.showLabel = False
+            self.flipAgainForNext = False
     
     def nextCard(self):
         '''
@@ -233,15 +238,16 @@ class Study(tk.Frame):
         '''
         temp = self.getArrLength() - 1
         self.flashcardIndex = self.flashcardIndex + 1
-        print(self.flashcardIndex)
-        print(temp)
         if temp < self.flashcardIndex:
             self.flashcardIndex = 0
         
         message = listKeys[self.flashcardIndex]
-        message1 = listValues[self.flashcardIndex]
         self.frontL0.config(text=message)
-        self.backL0.config(text=message1)
+		
+		if self.flipAgainForNext is True:
+            self.backL0.config(text="")
+            self.flipAgainForNext = False
+            self.showLabel = True
         
 '''
             self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
