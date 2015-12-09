@@ -191,7 +191,7 @@ class Study(tk.Frame):
         self.menuButton.place(x=20, y=self.y_button_coordinate)
         self.flipButton = tk.Button(self, text="Flip card",
                                     command=self.flip)
-        self.flipButton.config(width=12)
+        self.flipButton.config(width=10)
         self.flipButton.place(x=140, y=self.y_button_coordinate)
         self.nextCardButton = tk.Button(self, text="Next card", command=self.nextCard)
         self.nextCardButton.config(width=10)
