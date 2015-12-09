@@ -176,7 +176,7 @@ class Study(tk.Frame):
         self.randomNum = randint(0, len(listKeys))
         self.showLabel = False
         self.makeNewCard = False
-		self.flipAgainForNext = False
+	self.flipAgainForNext = False
 		 
         #Title labels
         study_label = tk.Label(self, text="Study Scene", font=TITLE_FONT)
