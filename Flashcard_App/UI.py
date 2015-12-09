@@ -223,7 +223,7 @@ class Study(tk.Frame):
 		
 		#comment, connie's stuff
 		self.timer = tk.Label(self, text="merp", font=CFLabel_FONT2)
-        self.frontL0.place(x=100, y=75)
+        self.timer.place(x=100, y=75)
 		
     def flip(self):
         if self.showLabel is False: 
