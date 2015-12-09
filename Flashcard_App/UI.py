@@ -248,7 +248,7 @@ class Study(tk.Frame):
         if self.flipAgainForNext is True:
             self.backL0.config(text="")
             self.flipAgainForNext = False
-            self.showLabel = True
+            self.showLabel = False
             
         
 '''
