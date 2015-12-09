@@ -178,6 +178,7 @@ class Study(tk.Frame):
         self.showLabel = False
         self.makeNewCard = False
         self.flipAgainForNext = False
+		
         #Title labels
         study_label = tk.Label(self, text="Study Scene", font=TITLE_FONT)
         study_label.pack(side="top")
