@@ -5,6 +5,7 @@
     the user has to click twice to flip the falshcard.
 '''
 
+
 import tkinter as tk
 import tkinter.messagebox
 from tkinter.ttk import *
@@ -101,7 +102,7 @@ class CreateFlashcards(tk.Frame):
         listValues = []
         global messageWid
         messageWid = tkinter.StringVar()
-		
+    
         #Labels
         label = tk.Label(self, text="Create some flashcards", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
@@ -176,8 +177,7 @@ class Study(tk.Frame):
         self.randomNum = randint(0, len(listKeys))
         self.showLabel = False
         self.makeNewCard = False
-		self.flipAgainForNext = False
-		 
+        self.flipAgainForNext = False
         #Title labels
         study_label = tk.Label(self, text="Study Scene", font=TITLE_FONT)
         study_label.pack(side="top")
@@ -243,11 +243,12 @@ class Study(tk.Frame):
         
         message = listKeys[self.flashcardIndex]
         self.frontL0.config(text=message)
-		
-		if self.flipAgainForNext is True:
+        
+        if self.flipAgainForNext is True:
             self.backL0.config(text="")
             self.flipAgainForNext = False
             self.showLabel = True
+            
         
 '''
             self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
