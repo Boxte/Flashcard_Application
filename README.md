@@ -7,7 +7,6 @@ Instructor: David P. McPherson
 
 
                                             Project 3
-<<<<<<< HEAD
                                           Flash Card App
 
 
@@ -26,25 +25,9 @@ Description:
 Specific Requirements:
 
     1. Interpreter: 
-        This app was programed using Python 3.5. In order to get the best experiences and full support, the users are suggested to dowload python 3.5 from the internet.
+        This app was programed using Python 3.5. In order to get the best experiences and full support, the users are suggested to download python 3.5 from the internet.
 
     2. Compile: 
         In order to run the program, the users should have three files : Flashcards.py, Front.py, UI.py in a same folder. The user will need to run UI.py file to start the program. the users can use Python launcher (come wit Python 3.5) or any other compilier that can compile python.
 
 
-
-
-
-
-=======
-
-
-Group members:		
-		Van Le, Connie Lim, Nhan Pham.
-
-Project Application: 	
-		Flash Card Application.
-
-Description:		
-		
->>>>>>> 36418a9f07b35ea940092d2a730eb289704c20f9
