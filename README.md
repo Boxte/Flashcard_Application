@@ -7,6 +7,7 @@ Instructor: David P. McPherson
 
 
                                             Project 3
+<<<<<<< HEAD
                                           Flash Card App
 
 
@@ -35,3 +36,15 @@ Specific Requirements:
 
 
 
+=======
+
+
+Group members:		
+		Van Le, Connie Lim, Nhan Pham.
+
+Project Application: 	
+		Flash Card Application.
+
+Description:		
+		
+>>>>>>> 36418a9f07b35ea940092d2a730eb289704c20f9
