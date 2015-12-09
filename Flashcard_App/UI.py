@@ -61,7 +61,7 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text="Welcome to the flashcard\napplication!",
                           font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
-        label1 = tk.Label(self, text="Creators: Van Le, Connie Lim, Nhan Pham")
+        label1 = tk.Label(self, text="Developers: Van Le, Connie Lim, Nhan Pham")
         label1.pack(side="top", pady=10)
         button1 = tk.Button(self, text="Next",
                             command=lambda: controller.show_frame(Menu))
@@ -85,7 +85,7 @@ class CreateFlashcards(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.f = tk.Frame(self,width=300,height=500)
+        self.f = tk.Frame(self,width=300,height=550)
         self.CreateWidgets(controller)
         
     def printAll(self):
@@ -259,6 +259,6 @@ class Study(tk.Frame):
         
 if __name__ == "__main__":
     app = FC_App()
-    app.geometry("500x300+150+50")
+    app.geometry("550x300+150+50")
     app.resizable(0, 0)
     app.mainloop()
