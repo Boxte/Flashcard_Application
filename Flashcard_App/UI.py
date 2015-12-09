@@ -113,25 +113,28 @@ class CreateFlashcards(tk.Frame):
         instructions2 = tk.Label(self, text="Click 'Submit entries' to enter one completed flashcard.")
         instructions2.pack(side="top")
         #Text entry boxes
+        label2 = tk.Label(self, text="Front Side").place(x=105, y = 150)
+        label3 = tk.Label(self, text="Back Side").place(x=360, y =150)
         self.frontOfCard = tk.Entry(self)
         self.backOfCard = tk.Entry(self)
         self.frontOfCard.config(width=20)
         self.backOfCard.config(width=20)
-        self.frontOfCard.place(x=50,y=150)
-        self.backOfCard.place(x=330, y=150)
+        self.frontOfCard.place(x=50,y=170)
+        self.backOfCard.place(x=300, y=170)
         
         #Buttons
         self.menuButton = tk.Button(self, text="Menu",
                            command=lambda: controller.show_frame(Menu),
                            bg="white")
         self.menuButton.config(width=10)
-        self.menuButton.place(x=20, y=260)
+        self.menuButton.place(x=30, y=260)
         self.submitButton = tk.Button(self, text="Submit entries",
                                  command=self.getKey)
         self.submitButton.config(width=15)
-        self.submitButton.place(x=200, y=260)
+        self.submitButton.place(x=190, y=260)
         self.finishButton = tk.Button(self, text="Finish", command=self.showFinishedBox)
-        self.finishButton.place(x=440,y=260)    
+        self.finishButton.config(width=10)
+        self.finishButton.place(x=395,y=260)
                 
     def getKey(self):
         listKeys.append(self.frontOfCard.get())
@@ -167,7 +170,7 @@ class Study(tk.Frame):
     def __init__(self,parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.f = tk.Frame(self,width=500,height=300)
+        self.f = tk.Frame(self,width=550,height=300)
         self.CreateWidgets(controller)
         
     def CreateWidgets(self, controller):
@@ -201,7 +204,7 @@ class Study(tk.Frame):
         self.finishButton.place(x=400,y=self.y_button_coordinate)
         self.startButton = tk.Button(self, text="Begin", command=self.initalize)
         self.startButton.config(width=15,height=3)
-        self.startButton.place(x=200, y=75)
+        self.startButton.place(x=195, y=75)
         
     #Necessary method below to avoid definition errors
     def getArrLength(self):
