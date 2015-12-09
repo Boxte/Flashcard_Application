@@ -1,3 +1,4 @@
+@@ -1,267 +0,0 @@
 
 #Documentation
 '''
@@ -219,6 +220,11 @@ class Study(tk.Frame):
         message = listKeys[self.flashcardIndex]
         self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
         self.frontL0.place(x=160, y=75)
+		
+		#comment, connie's stuff
+		self.timer = tk.Label(self, text="merp", font=CFLabel_FONT2)
+        self.frontL0.place(x=100, y=75)
+		
     def flip(self):
         if self.showLabel is False: 
             message1 = listValues[self.flashcardIndex]
