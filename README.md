@@ -31,3 +31,9 @@ Specific Requirements:
         In order to run the program, the users should have three files : Flashcards.py, Front.py, UI.py in a same folder. The user will need to run UI.py file to start the program. the users can use Python launcher (come wit Python 3.5) or any other compilier that can compile python.
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 3fa9604aa57f994dfbd9eca1aa548ad303d596a1
