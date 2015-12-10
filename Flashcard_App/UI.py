@@ -295,5 +295,3 @@ if __name__ == "__main__":
     app.geometry("550x300+150+50")
     app.resizable(0, 0)
     app.mainloop()
-UI.pyOpen
-Displaying UI.py.
