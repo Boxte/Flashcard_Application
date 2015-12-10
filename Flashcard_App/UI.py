@@ -12,11 +12,16 @@ from tkinter.ttk import *
 from Font import *
 from Flashcards import *
 from random import *
+import time
 
 #Global variable
 backEnd = Flashcards()
 global messageFront
 global messageBack
+global secs
+secs = 0
+global sec
+sec = 1
 ###There are more
 
 
@@ -170,6 +175,7 @@ class Study(tk.Frame):
     def __init__(self,parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self.secs = 5
         self.f = tk.Frame(self,width=550,height=300)
         self.CreateWidgets(controller)
         
@@ -205,6 +211,13 @@ class Study(tk.Frame):
         self.startButton = tk.Button(self, text="Begin", command=self.initalize)
         self.startButton.config(width=15,height=3)
         self.startButton.place(x=195, y=75)
+		
+		self.timerBuild()
+        self.secondsLabel()
+        self.tick()
+            
+    def setSecsToZero(self):
+        self.secs = 0
         
     #Necessary method below to avoid definition errors
     def getArrLength(self):
@@ -215,10 +228,27 @@ class Study(tk.Frame):
         message = listKeys[0]
         print(message + ":")   
     def initalize(self):
+		self.minutes = 0
         self.startButton.destroy()
         message = listKeys[self.flashcardIndex]
         self.frontL0 = tk.Label(self, text=message, font=CFLabel_FONT2)
         self.frontL0.place(x=160, y=75)
+		self.timerBuild()
+		
+	def secondsLabel(self):
+		self.seconds_label = tk.Label(self, text=" seconds", font=CFLabel_FONT2)
+        self.seconds_label.place(x=440, y=80)
+    def timerBuild(self):
+        self.timer = tk.Label(self, text="Timer:", font=CFLabel_FONT2)
+        self.timer.place(x=450, y=25)
+    def tick(self):
+        global sec
+        sec += 1
+        self.time = tk.Label(self, font=CFLabel_FONT2)
+        self.time['text'] = sec
+        self.time.after(1000, self.tick)
+        self.time.place(x=450, y=60)
+		
     def flip(self):
         if self.showLabel is False: 
             message1 = listValues[self.flashcardIndex]
